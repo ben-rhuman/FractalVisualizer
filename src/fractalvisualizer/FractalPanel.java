@@ -15,7 +15,8 @@ import javax.swing.KeyStroke;
 
 /**
  *
- * @author Ben
+ * @author Ben Rhuman
+ * 12/24/16
  */
 public class FractalPanel extends JPanel {
 
