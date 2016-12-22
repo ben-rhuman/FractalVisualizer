@@ -19,12 +19,12 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Ben
+ * @author Ben Rhuman 12/24/16
  */
 public class FractalImage extends JPanel {
 
     private BufferedImage canvas;
-    
+
     //Screen capture
     int captureNum = 0;
 
@@ -151,7 +151,6 @@ public class FractalImage extends JPanel {
         //Constants
         int MAX_ITERATION = 1000;
 
-
         for (int i = 0; i < windowX; i++) {
             for (int j = 0; j < windowY; j++) {
                 x = 0.0;
@@ -212,8 +211,9 @@ public class FractalImage extends JPanel {
 
     public void screenCapture() {
         captureNum++;
+        System.out.println("Screenshot taken.");
         try {
-            File f = new File("mandelbrot_"+ captureNum +".png");
+            File f = new File("wallpapers/" + windowX + "x" + windowY + "/mandelbrot_" + captureNum + ".png");
             ImageIO.write(canvas, "PNG", f);
         } catch (Exception e) {
             e.printStackTrace();
@@ -230,20 +230,20 @@ public class FractalImage extends JPanel {
         //Sizes the new window based on maginification
         double xShift = 0.5 * Math.sqrt(((X_HIGH - X_LOW) * (X_HIGH - X_LOW)) / magnification);
         double yShift = 0.5 * Math.sqrt(((Y_HIGH - Y_LOW) * (Y_HIGH - Y_LOW)) / magnification);
-        
+
         System.out.println("xShift: " + xShift);
         System.out.println("yShift: " + yShift);
-        
+
         //Reset boundaries to reflect the zoom
         X_LOW = x0 - xShift;
         X_HIGH = x0 + xShift;
         Y_LOW = y0 - yShift;
         Y_HIGH = y0 + yShift;
-        
+
         canvas = mandelbrotSet();
         repaint();
     }
-    
+
     public void zoomOut(int x, int y, double magnification) {
         //Translates to the current window coordinates
         double deltaX = (X_HIGH - X_LOW) / windowX;
@@ -254,18 +254,18 @@ public class FractalImage extends JPanel {
         //Sizes the new window based on maginification
         double xShift = 0.5 * (X_HIGH - X_LOW) * Math.sqrt(magnification);
         double yShift = 0.5 * (Y_HIGH - Y_LOW) * Math.sqrt(magnification);
-        
+
         System.out.println("xShift: " + xShift);
         System.out.println("yShift: " + yShift);
-        
+
         //Reset boundaries to reflect the zoom
         X_LOW = x0 - xShift;
         X_HIGH = x0 + xShift;
         Y_LOW = y0 - yShift;
         Y_HIGH = y0 + yShift;
-        
+
         canvas = mandelbrotSet();
         repaint();
     }
-    
+
 }
